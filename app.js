@@ -28,13 +28,13 @@ const renderWorkstation = (doc) => {
 };
 
 //getting data
-db.collection('workstations')
-  .get()
-  .then((snapshot) => {
-    snapshot.docs.forEach((doc) => {
-      renderWorkstation(doc);
-    });
-  });
+// db.collection('workstations')
+//   .get()
+//   .then((snapshot) => {
+//     snapshot.docs.forEach((doc) => {
+//       renderWorkstation(doc);
+//     });
+//   });
 
 //saving Data
 form.addEventListener('submit', (e) => {
@@ -47,3 +47,18 @@ form.addEventListener('submit', (e) => {
   form.name.value = '';
   form.city.value = '';
 });
+
+//realtime listener
+db.collection('workstations')
+  .orderBy('city')
+  .onSnapshot((snapshot) => {
+    let changes = snapshot.docChanges();
+    changes.forEach((change) => {
+      if (change.type == 'added') {
+        renderWorkstation(change.doc);
+      } else if (change.type == 'removed') {
+        let li = workstationsList.querySelector(`[data-id=${change.doc.id}]`);
+        workstationsList.removeChild(li);
+      }
+    });
+  });
