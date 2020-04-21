@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
     <link rel="stylesheet" href="styles.css" />
     <title>Cloud Workstations</title>
   </head>
@@ -14,6 +16,23 @@
 
       <ul id="cafe-list"></ul>
     </div>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: 'AIzaSyD7TYZuaNE9NALTk_MkUMTY6LKN0j5tllA',
+        authDomain: 'cloud-workstations-2758e.firebaseapp.com',
+        databaseURL: 'https://cloud-workstations-2758e.firebaseio.com',
+        projectId: 'cloud-workstations-2758e',
+        storageBucket: 'cloud-workstations-2758e.appspot.com',
+        messagingSenderId: '991464038288',
+        appId: '1:991464038288:web:93271d94b3dda4d43f1d15',
+        measurementId: 'G-3325JB755G',
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+    </script>
 
     <script src="app.js"></script>
   </body>
