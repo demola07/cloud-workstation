@@ -1,4 +1,5 @@
 const workstationsList = document.querySelector('#cafe-list');
+const form = document.querySelector('#add-cafe-form');
 
 //Create element and render list
 const renderWorkstation = (doc) => {
@@ -16,6 +17,7 @@ const renderWorkstation = (doc) => {
   workstationsList.appendChild(li);
 };
 
+//getting data
 db.collection('workstations')
   .get()
   .then((snapshot) => {
@@ -23,3 +25,15 @@ db.collection('workstations')
       renderWorkstation(doc);
     });
   });
+
+//saving Data
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  db.collection('workstations').add({
+    name: form.name.value,
+    city: form.city.value,
+  });
+  form.name.value = '';
+  form.city.value = '';
+});
